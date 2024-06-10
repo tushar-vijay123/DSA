@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
+        // O(n) time complexity
         vector<int> ans;
         int len = nums.size();
 

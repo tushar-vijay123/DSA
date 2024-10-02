@@ -1,26 +1,45 @@
 class Solution {
 public:
-    int singleNonDuplicate(vector<int>& nums) {
-        // Approach - using even and odd length (index) to determine whether a subarray contains unique element or not
-        int left = 0, right = nums.size() - 1;
-        int mid = left + (right - left)/2;
-
-        while(left < right)
+    int singleNonDuplicate(vector<int>& arr) {
+        if(arr.size() == 1)
         {
-            if(mid % 2 == 1)
+            return arr[0];
+        }
+
+        int s = 0, e = arr.size() - 1;
+
+        while(s <= e)
+        {
+            int mid = s + (e - s)/2;
+            
+            if(mid < arr.size() - 1 && arr[mid] == arr[mid + 1])
             {
-                mid--;
+                if(mid % 2 != 0)
+                {
+                    e = mid - 1;
+                }
+                else
+                {
+                    s = mid + 1;
+                }
             }
-            if(nums[mid] == nums[mid + 1])
+            else if(mid > 0 && arr[mid] == arr[mid - 1])
             {
-                left = mid + 2;
+                if(mid % 2 == 0)
+                {
+                    e = mid - 1;
+                }
+                else
+                {
+                    s = mid + 1;
+                }
             }
             else
             {
-                right = mid - 1;
+                return arr[mid];
             }
-            mid = left + (right - left)/2;
         }
-        return nums[left];
+
+        return -1;
     }
 };

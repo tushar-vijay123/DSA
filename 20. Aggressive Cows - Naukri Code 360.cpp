@@ -1,6 +1,5 @@
 bool isPossible(vector<int> stalls, int n, int k, int minAllowedDist) {
-    sort(stalls.begin(), stalls.end());
-
+    
     int cows = 1;
     int lastPos = stalls[0];
 
@@ -18,16 +17,10 @@ bool isPossible(vector<int> stalls, int n, int k, int minAllowedDist) {
 
 int aggressiveCows(vector<int> &stalls, int k)
 {
-    int maxi = stalls[0], mini = stalls[0];
+    sort(stalls.begin(), stalls.end());
     int n = stalls.size();
-    for(int i = 0; i < n; i++) {
-        if(stalls[i] > maxi)
-            maxi = stalls[i];
-        if(stalls[i] < mini)
-            mini = stalls[i];
-    }
 
-    int s = 1, e = maxi - mini; // minimum & maximum distance -> range
+    int s = 1, e = stalls[n-1] - stalls[0]; // minimum & maximum distance -> range
     int ans = -1;
 
     while(s <= e) {
